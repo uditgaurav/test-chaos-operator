@@ -80,7 +80,9 @@ jobs:
 
       - name: Install LitmusChaos
         run: | 
+          whereis .kube
           export PATH=$PATH:$(go env GOPATH)/bin
+          export KUBECONFIG=${HOME}/.kube/config 
           cd ${GOPATH}/src/github.com/litmuschaos/litmus-e2e
           go test tests/install-litmus_test.go -v -count=1
         env:
