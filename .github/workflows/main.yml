@@ -82,12 +82,12 @@ jobs:
         run: | 
           whereis .kube
           export PATH=$PATH:$(go env GOPATH)/bin
-          export KUBECONFIG=${HOME}/.kube/config 
           cd ${GOPATH}/src/github.com/litmuschaos/litmus-e2e
           go test tests/install-litmus_test.go -v -count=1
         env:
           OPERATOR_IMAGE: litmuschaos/chaos-operator:ci
           IMAGE_PULL_POLICY: IfNotPresent
+          KUBECONFIG: /home/runner/.kube/config 
  
       - name: Run Admin mode test
         if: startsWith(github.event.comment.body, '/run-e2e-admin-mode') || startsWith(github.event.comment.body, '/run-e2e-all')
